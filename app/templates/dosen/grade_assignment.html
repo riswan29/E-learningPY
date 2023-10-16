@@ -1,0 +1,86 @@
+{% extends "temp/base_dsn.html" %}
+{% load static %}
+
+{% block content %}
+<div class="techwave_fn_content">
+
+    <!-- PAGE (all pages go inside this div) -->
+    <div class="techwave_fn_page">
+
+        <!-- FAQ Page -->
+        <div class="techwave_fn_contact_page">
+
+            <!-- Page Title -->
+            <div class="techwave_fn_pagetitle">
+                <h2 class="title">Tugas : {{ assignment.title }}</h2>
+                <h3 class="title">Pengirim : {{ submission.author.full_name }}</h3>
+            </div>
+            <!-- !Page Title -->
+
+            <div class="contactpage">
+                <div class="container small">
+
+
+
+                    <div class="fn_contact_form">
+                        <form method="post" class="contact_form" id="contact_form"
+                            autocomplete="off">
+                            {% csrf_token %}
+                            <div class="input_list">
+                                <ul>
+                                    <li>
+                                        <label class="form-label" for="#">Nilai</label>
+                                        <input type="number" class="form-control" placeholder="Nilai"
+                                        {{form.grade}}
+                                        
+                                    </li>
+                                    <li>
+                                        <label class="form-label" for="#">Feedback</label>
+                                        <textarea class="form-control"
+                                            placeholder="Feedback" value{{form.feedback}}
+                                            
+                                        </textarea>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <input type="submit" class="techwave_fn_button"  value="Simpan Nilai">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="returnmessage"
+                                data-success="Your message has been received, We will contact you soon.">
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- !FAQ Page -->
+
+    </div>
+    <!-- !PAGE (all pages go inside this div) -->
+
+
+    <!-- FOOTER (inside the content) -->
+    <footer class="techwave_fn_footer">
+        <div class="techwave_fn_footer_content">
+            <div class="copyright">
+                <p>2023© Fransiskus Riswan Indra Simbolon</p>
+            </div>
+            <div class="menu_items">
+                <ul>
+                    <li><a href="terms.html">T A </a></li>
+                    <li><a href="privacy.html">Skrispi </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- !FOOTER (inside the content) -->
+
+</div>
+{% endblock content %}

@@ -1,0 +1,92 @@
+{% extends "temp/base_dsn.html" %}
+{% load static %}
+
+{% block content %}
+<div class="techwave_fn_content">
+
+    <!-- PAGE (all pages go inside this div) -->
+    <div class="techwave_fn_page">
+
+        <!-- FAQ Page -->
+        <div class="techwave_fn_contact_page">
+
+            <!-- Page Title -->
+            <div class="techwave_fn_pagetitle">
+                <h2 class="title">Buat Tugas</h2>
+            </div>
+            <!-- !Page Title -->
+
+            <div class="contactpage">
+                <div class="container small">
+
+
+
+                    <div class="fn_contact_form">
+                        <form method="post" enctype="multipart/form-data" class="contact_form" id="contact_form" autocomplete="off">
+                            {% csrf_token %} 
+                            <div class="input_list">
+                                <ul>
+                                    <li>
+                                        <label class="form-label" for="#">Jurusan</label>
+                                        <div class="common_select">
+                                            {{ form.departement }}
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label class="form-label" for="#">Semester</label>
+                                        <div class="common_select">
+                                            <div class="common_select">
+                                                {{ form.semester }}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label class="form-label" for="#">Nama Tugas</label>
+                                        {{ form.title }}
+                                    </li>
+                                    <li> 
+                                        <label class="form-label" for="#">Deadline</label>
+                                        {{ form.deadline }}
+                                    </li>
+                                    <li> 
+                                        <label class="form-label" for="#">Deskripsi</label>
+                                        {{ form.description }}
+                                    </li>
+                                    <li>
+                                        <label class="form-label" for="#">File</label>
+                                        {{ form.attachment }}
+                                    <li>
+                                        <div>
+                                            <button type="submit" class="techwave_fn_button">
+                                                <span>Add Tugas</span>
+                                            </button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="returnmessage"
+                                data-success="Your message has been received, We will contact you soon."></div>
+                            <div class="empty_notice"><span>! Please Fill Required Fields !</span></div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- !FAQ Page -->
+
+    </div>
+    <!-- !PAGE (all pages go inside this div) -->
+
+
+    <!-- FOOTER (inside the content) -->
+    <footer class="techwave_fn_footer">
+        <div class="techwave_fn_footer_content">
+            <div class="copyright">
+                <p>2023© Fransiskus Riswan Indra Simbolon</p>
+            </div>
+
+            {% endblock content %}

@@ -1,0 +1,134 @@
+{% extends "temp/base_dsn.html" %}
+{% load static %}
+
+{% block content%}
+<style>
+    /* CSS untuk mengatur tata letak tombol dan input */
+    .search-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .search-container input {
+        margin-right: 10px;
+    }
+
+    .search-container button {
+        margin-left: auto; /* Memindahkan tombol ke kanan */
+    }
+</style>
+<div class="techwave_fn_content">
+	<!-- PAGE (all pages go inside this div) -->
+	<div class="techwave_fn_page">
+		<!-- Community Feed Page -->
+		<div class="techwave_fn_community_page">
+			<div class="fn__title_holder">
+				<div class="container">
+					<h1 class="title">Lihat Tugas</h1>
+				</div>
+			</div>
+			<!-- Feed -->
+			<form method="GET" action="{% url 'view_ass' %}">
+				<label for="start_date">Start</label>
+				<input type="date" id="start_date" name="start_date" value="{% if request.GET.start_date %}{{ request.GET.start_date }}{% endif %}">
+				<label for="end_date">End</label>
+				<input type="date" id="end_date" name="end_date" value="{% if request.GET.end_date %}{{ request.GET.end_date }}{% endif %}">
+				<button type="submit">Filter</button>
+				
+						<input type="text" id="search_query" name="search_query" placeholder="Cari Judul Tugas" value="{% if request.GET.search_query %}{{ request.GET.search_query }}{% endif %}">
+						<button type="submit">Cari</button>
+			  </form>
+			<div class="techwave_fn_feed">
+				<div class="container">
+					<!-- !feed filter -->
+					<!-- feed content -->
+					<div class="feed__content">
+						<div class="feed__results">
+							<div class="fn__preloader">
+								<div class="icon"></div>
+								<div class="text">Loading</div>
+							</div>
+							<div class="pagination">
+								<table class="table lms_table_active">
+									<thead>
+										<tr>
+											<th scope="col" style="text-align: center;" width:'150px';>Judul Tugas</th>
+											<th scope="col" style="text-align: center;" width:'150px';>Deadline </th>
+											<th scope="col" style="text-align: center;" width:'150px';>Jurusan dan Semester</th>
+											<th scope="col" style="text-align: center;" width:'150px';>Total Pengirim
+											</th>
+											<th scope="col" style="text-align: center;" width:'150px';>Pengirim</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for assignment in page_obj %}
+										<tr>
+											<th scope="row"><a href=""
+													class="question_content"></a>{{ assignment.title }}</th>
+											<td>{{ assignment.deadline }}</td>
+											<td>{{ assignment.departement }} - {{ assignment.semester }}</td>
+											<td>{{ assignment.submission_set.count }}</td>
+											{% if assignment.attachment %}
+											<td><a href="{% url 'pengirim' assignment.id %}">Lihat Pengirim</a></td>
+											{% endif %}
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="pagination">
+							<ul class="pagination__list">
+								{% if page_obj.has_previous %}
+									<li class="pagination__item"><a href="?page=1" class="pagination__link">&laquo;</a></li>
+									<li class="pagination__item"><a href="?page={{ page_obj.previous_page_number }}" class="pagination__link">Start</a></li>
+								{% endif %}
+								
+								{% for num in page_obj.paginator.page_range %}
+									<li class="pagination__item {% if page_obj.number == num %}active{% endif %}"><a href="?page={{ num }}" class="pagination__link">{{ num }}</a></li>
+								{% endfor %}
+								
+								{% if page_obj.has_next %}
+									<li class="pagination__item"><a href="?page={{ page_obj.next_page_number }}" class="pagination__link">End</a></li>
+									<li class="pagination__item"><a href="?page={{ page_obj.paginator.num_pages }}" class="pagination__link">&raquo;</a></li>
+								{% endif %}
+							</ul>
+						</div>
+						<!-- !feed content -->
+
+					</div>
+				</div>
+				<!-- !Feed -->
+
+			</div>
+			<!-- !Community Feed Page -->
+
+		</div>
+		<!-- !PAGE (all pages go inside this div) -->
+
+
+		<!-- FOOTER (inside the content) -->
+		<footer class="techwave_fn_footer">
+			<div class="techwave_fn_footer_content">
+				<div class="copyright">
+					<p>2023© Fransiskus Riswan Indra Simbolon</p>
+				</div>
+				<div class="menu_items">
+					<ul>
+						<li><a href="terms.html">T A </a></li>
+						<li><a href="privacy.html">Skrispi </a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+		<!-- !FOOTER (inside the content) -->
+
+	</div>
+	<!-- !CONTENT -->
+
+
+</div>
+</div>
+{% endblock content%}

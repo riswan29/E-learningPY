@@ -1,0 +1,39 @@
+/* Override the main color of the sidebar */
+.jet-nav-sidebar {
+    background-color: darkblue;
+}
+
+/* Override the hover color of the sidebar menu items */
+.jet-nav-sidebar li a:hover {
+    background-color: default;
+}
+
+/* Override the color of the top navigation bar */
+.jet-nav-top {
+    background-color: darkblue;
+}
+
+/* Override the color of the top navigation bar icons and text */
+.jet-nav-top .nav-item a, .jet-nav-top .nav-item i {
+    color: DarkBlue;
+}
+
+/* Override the color of the top navigation bar icons and text on hover */
+.jet-nav-top .nav-item a:hover, .jet-nav-top .nav-item i:hover {
+    color: DarkBlue;
+}
+
+/* Override the color of the active sidebar menu item */
+.jet-nav-sidebar li.active a {
+    background-color: default;
+}
+
+/* Override the color of the sidebar menu item text */
+.jet-nav-sidebar li a {
+    color: DarkBlue;
+}
+
+/* Override the color of the sidebar menu item text on hover */
+.jet-nav-sidebar li a:hover {
+    color: DarkBlue;
+}

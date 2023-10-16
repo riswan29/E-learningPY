@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Tugas</title>
+</head>
+<body>
+
+<h1>Tugas yang Sudah atau Belum Dinilai</h1>
+
+<form method="GET" action="{% url 'view_assigned_assignments' %}">
+    {{ form.as_p }}
+    <button type="submit">Filter</button>
+</form>
+
+<h2>Tugas yang Sudah Dinilai</h2>
+<ul>
+    {% for assignment in graded_assignments %}
+        <li>
+            Tugas: {{ assignment.assignment.title }} - Status: {{ assignment.status }}
+            <ul>
+                {% for submission in assignment.graded_submissions %}
+                    <li>
+                        <a href="{% url 'view_grade_dsn' submission.id %}">Lihat Nilai - {{ submission.author.email }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Tugas yang Belum Dinilai</h2>
+<ul>
+    {% for assignment in ungraded_assignments %}
+        <li>Tugas: {{ assignment.assignment.title }} - Status: {{ assignment.status }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

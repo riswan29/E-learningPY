@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+        /* CSS untuk mengatur tata letak halaman */
+        body {
+            display: flex;
+            flex-direction: row;
+        }
+        .sesi-container {
+            width: 30%; /* Lebar container sesi di sebelah kanan */
+            padding: 20px;
+        }
+        .chatbot-container {
+            flex: 1; /* Bagian chatbot akan mengisi sisa lebar halaman */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sesi Container (Sebelah Kanan) -->
+    <div class="sesi-container">
+        <h2>Daftar Halaman sesi</h2>
+        <ul>
+            {% for sesi in sesi_list %}
+                <li><a href="{% url 'tambah_data_tabel' uuid=sesi.uuid %}">Go Tabel {{ forloop.counter }}</a></li>
+                <a href="{% url 'hapus_sesi' uuid=sesi.uuid %}" onclick="return confirm('Anda yakin ingin menghapus sesi ini?')">Delete</a>
+            {% endfor %}
+            
+            <li><a href="{% url 'tabel' %}">new chat {{ forloop.counter }}</a></li>
+        </ul>
+    </div>
+
+    <!-- Chatbot Container (Sebelah Kiri) -->
+    <div class="chatbot-container">
+        <h1>Chatbot</h1>                       
+
+        <form method="post" id="userInputForm">
+            {% csrf_token %}
+            <label for="user_input">Pertanyaan:</label><br>
+            <textarea id="user_input" name="user_input" rows="5" cols="50"></textarea><br>
+            <button type="submit">Kirim</button>
+        </form>
+
+        <h2>Chat</h2>
+
+        <div id="chatContainer">
+            <!-- Display existing chat messages from the database -->
+            {% for conversation in conversations %}
+                <p>User:<pre> <code class="highlight">{{ conversation.user_message }}</code></pre></p>
+                <p>Assistant:<pre> <code class="highlight">{{ conversation.chatbot_response }}</code></pre></p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            $('#userInputForm').on('submit', function(event) {
+                event.preventDefault();  // Prevent the form from submitting via the default method
+    
+                var user_input = $('#user_input').val();
+    
+                // Send the user input to the server
+                $.ajax({
+                    type: 'POST',
+                    url: '',
+                    data: {
+                        'user_input': user_input,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function(data) {
+                        // Determine if the chatbot response needs code formatting
+                        var formatted_response = data.chatbot_response.startsWith('```') && data.chatbot_response.endsWith('```') ?
+                            '<pre><code class="highlight">' + data.chatbot_response.slice(3, -3) + '</code></pre>' :
+                            data.chatbot_response;
+    
+                        // Update the chat container with the user input and chatbot response
+                        $('#chatContainer').append('<p>User: <code class="highlight">' + data.user_input + '</code></p>');
+                        $('#chatContainer').append('<p>Assistant: ' + formatted_response + '</p>');
+    
+                        // Clear the user input textarea
+                        $('#user_input').val('');
+    
+                        // Highlight new code blocks
+                        $('code').each(function(i, block) {
+                            hljs.highlightBlock(block);
+                        });
+    
+                        // Reload the page after receiving the response
+                         location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+    
+    
+</body>
+</html>
+

@@ -1,0 +1,152 @@
+{% extends "temp/base.html" %}
+{% load static %}
+{% block content %}
+<!-- CONTENT -->
+<div class="techwave_fn_content">
+
+    <!-- PAGE (all pages go inside this div) -->
+    <div class="techwave_fn_page">
+
+        <!-- Home Page -->
+        <div class="techwave_fn_home">
+            <div class="section_home">
+                <div class="section_left">
+
+                    <!-- Title Shortcode -->
+                    <div class="techwave_fn_title_holder">
+                        <h1 class="title">Selamat datang kembali <i>{{request.user.full_name}}</i></h1>
+                    </div>
+                    <!-- !Title Shortcode -->
+
+                    <!-- Interactive List Shortcode -->
+                    <div class="techwave_fn_interactive_list modern">
+                        <ul>
+                            <li>
+                                <div class="item">
+                                    <a href="{% url 'list_tgs' %}">
+                                        <span class="icon">
+                                            <img src="{% static "svg/task.svg" %}" alt="" class="fn__svg">
+                                        </span>
+                                        <h2 class="title">Lihat Tugas</h2>
+                                        <span class="arrow"><img src="{% static "svg/arrow.svg" %}" alt="" class="fn__svg"></span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <a href="{% url "tabel" %}">
+                                        <span class="icon">
+                                            <img src="{% static "svg/chat.svg" %}" alt="" class="fn__svg">
+                                        </span>
+                                        <h2 class="title">AI Chat Bot</h2>
+                                        <span class="arrow"><img src="{% static "svg/arrow.svg" %}" alt="" class="fn__svg"></span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <center>
+                                    <h2 class="title">Jadwal Hari Ini</h2>
+                                    <form method="get">
+                                        <select name="hari" onchange="this.form.submit()">
+                                            <option value="SENIN" {% if current_day == 'SENIN' %}selected{% endif %}>Senin</option>
+                                            <option value="SELASA" {% if current_day == 'SELASA' %}selected{% endif %}>Selasa</option>
+                                            <option value="RABU" {% if current_day == 'RABU' %}selected{% endif %}>Rabu</option>
+                                            <option value="KAMIS" {% if current_day == 'KAMIS' %}selected{% endif %}>Kamis</option>
+                                            <option value="JUMAT" {% if current_day == 'JUMAT' %}selected{% endif %}>Jumat</option>
+                                            <option value="SABTU" {% if current_day == 'SABTU' %}selected{% endif %}>Sabtu</option>
+                                        </select>
+                                    </form>
+                                    <br>
+                                </center>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Mata Kuliah</th>
+                                            <th>Jam</th>
+                                            <th>Ruangan</th>
+                                            <th>Ruangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for jadwal_item in jadwal %}
+                                        <tr>
+                                            <td>{{ jadwal_item.mata_kuliah }}</td>
+                                            <td>{{ jadwal_item.hari }}</td>
+                                            <td>{{ jadwal_item.jam_mulai }}</td>
+                                            <td>{{ jadwal_item.jam_berakhir }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- !Interactive List Shortcode -->
+
+                </div>
+                <div class="section_right">
+                    <div class="company_info">
+                        <!-- <img src="img/full2.png" alt=""> -->
+                        <div id="idx-calendar">
+                            <div id="calendar-control">
+                             <div id="monthNow">Januari 2014</div>
+                             <div id="nextMonth"></div>
+                             <div id="prevMonth"></div>
+                            </div>
+                            <div id="dayNames">
+                             <ul>
+                              <li>Minggu</li>
+                              <li>Senin</li>
+                              <li>Selasa</li>
+                              <li>Rabu</li>
+                              <li>Kamis</li>
+                              <li>Jumat</li>
+                              <li>Sabtu</li>
+                             </ul>
+                            </div>
+                            <div id="daysNum">
+                            </div>
+                           </div>
+
+
+                        <hr>
+                        <!-- <div class="fn__members">
+                            <div class="active item">
+                                <span class="circle"></span>
+                                <span class="text">Tugas : 9999</span>
+                            </div>
+                            <div class="item">
+                                <span class="circle"></span>
+                                <span class="text">Total Pengirim Hari Ini: 999</span>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- !Home Page -->
+
+    </div>
+    <!-- !PAGE (all pages go inside this div) -->
+
+
+    <!-- FOOTER (inside the content) -->
+    <footer class="techwave_fn_footer">
+        <div class="techwave_fn_footer_content">
+            <div class="copyright">
+                <p>2023© Fransiskus Riswan Indra Simbolon</p>
+            </div>
+            <div class="menu_items">
+                <ul>
+                    <li><a href="terms.html">T A </a></li>
+                    <li><a href="privacy.html">Skrispi </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- !FOOTER (inside the content) -->
+
+</div>
+<!-- !CONTENT -->
+{% endblock content %}

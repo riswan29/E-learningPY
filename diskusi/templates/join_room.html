@@ -1,0 +1,95 @@
+{% extends "temp/base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- CONTENT -->
+<div class="techwave_fn_content">
+
+    <!-- PAGE (all pages go inside this div) -->
+    <div class="techwave_fn_page">
+
+        <!-- User Profile Page -->
+        <div class="techwave_fn_user_profile_page">
+            <!-- Page Title -->
+            <div class="techwave_fn_pagetitle">
+                <h2 class="title">Join Room</h2>
+            </div>
+            <!-- !Page Title -->
+
+            <div class="container small">
+                <div class="techwave_fn_user_profile">
+
+                    <div class="user__profile">
+                        <!--  <div class="user_avatar">
+                            <img src="img/discus2.png" alt="">
+                        </div> -->
+                        <div class="user__details">
+
+                                    <div class="item">
+                                        <div class="user_avatar">
+                                        <h4 class="subtitle">Nama Room</h4>
+                                        <h3 class="title">{{ room.name }}</h3></div>
+                                    </div>
+
+                            </div>
+
+                            <div class="item">
+                                <ul>
+
+
+                                        <div class="item">
+                                            <div class="filter__sorting">
+                                                <form method="POST">
+                                                    {% csrf_token %}
+                                                    <label for="code">Enter the room code:</label>
+                                                    <input type="text" id="code" name="code"  class="filter__new disabled techwave_fn_button has__icon small__border">
+                                                    <br>
+                                                    <button type="submit" class="techwave_fn_button">Join Room</button>
+                                                </a>
+                                            </for>
+                                            </div>
+                                            <!-- <a  href="chat_room.html" class="techwave_fn_button">
+                                                <span>Enter Room</span>
+                                            </a> -->
+                                        </div>
+
+                                </ul>
+
+                        <!-- <a href="user-settings.html" class="user_edit fn__icon_button">
+                            <img src="svg/setting.svg" alt="" class="fn__svg">
+                        </a> -->
+                    </div>
+
+                    <!--  -->
+
+                </div>
+            </div>
+
+        </div>
+        <!-- !User Profile Page -->
+
+    </div>
+    <!-- !PAGE (all pages go inside this div) -->
+
+
+    <!-- FOOTER (inside the content) -->
+    <footer class="techwave_fn_footer">
+        <div class="techwave_fn_footer_content">
+            <div class="copyright">
+                <p>2023© Fransiskus Riswan Indra Simbolon</p>
+            </div>
+            <div class="menu_items">
+                <ul>
+                    <li><a href="terms.html">T A </a></li>
+                    <li><a href="privacy.html">Skrispi </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- !FOOTER (inside the content) -->
+
+</div>
+<!-- !CONTENT -->
+{% endblock content %}

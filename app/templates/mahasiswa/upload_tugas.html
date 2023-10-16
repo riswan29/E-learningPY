@@ -1,0 +1,105 @@
+{% extends "temp/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="techwave_fn_content">
+	<!-- PAGE (all pages go inside this div) -->
+	<div class="techwave_fn_page">
+	  <!-- Community Feed Page -->
+	  <div class="techwave_fn_community_page">
+		<div class="fn__title_holder">
+		  <div class="container">
+			<h1 class="title">Upload Tugas</h1>
+		  </div>
+		</div>
+		<!-- Feed -->
+		<div class="techwave_fn_feed">
+		  <div class="container">
+			<!-- feed filter -->
+			
+			<!-- !feed filter -->
+			<!-- feed content -->
+			<div class="feed__content">
+			  <div class="feed__results">
+				<div class="fn__preloader">
+				  <div class="icon"></div>
+				  <div class="text">Loading</div>
+				</div>
+				<div class="pagination">
+				  <table class="table lms_table_active">
+					<thead>
+					  <tr>
+						<th scope="col" style="text-align: center;"  width = '150px';>Nama Tugas</th>
+                        <th scope="col" style="text-align: center;"  width = '150px';>Keterangan</th>
+						<th scope="col" style="text-align: center;"  width = '150px';>Deadline</th>
+                        <th scope="col" style="text-align: center;"  width = '150px';>Kirim Tugas</th>
+					  </tr>
+					</thead>
+					{% if is_submission_open %}
+                            {% if existing_submission %}
+					<tbody>
+                        
+                            <th scope="row">{{ assignment.title }}</th>
+                            <td>{{assignment.description}}</td>
+                            <td>{{assignment.deadline}}</td>
+                            <td>Anda sudah mengirimkan tugas. | <a href="{% url 'edit_kiriman' assignment.id %}">Edit Kiriman</a>
+                            {% else %}
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                        <tr>
+                            <th scope="row">{{ assignment.title }}</th>
+                            <td>{{assignment.description}}</td>
+                            <td>{{assignment.deadline}}</td>
+                            <td>{{form.attachment}}
+                              <input type="submit" value="Kirim Tugas"></td>
+                        </tr>
+                      </form>
+                      {% endif %}
+                      {% else %}
+					  <tr>
+						<th scope="row">{{ assignment.title }}</th>
+						<td>{{assignment.description}}</td>
+						<td>{{assignment.deadline}}</td>
+						<td>Mohon maaf, batas waktu pengiriman tugas telah berakhir.</td>
+					</tr>
+    			{% endif %}
+                    </tbody>
+				  </table>
+				</div>
+			  </div>
+							<!-- !feed content -->
+
+						</div>
+					</div>
+					<!-- !Feed -->
+
+				</div>
+				<!-- !Community Feed Page -->
+
+			</div>
+			<!-- !PAGE (all pages go inside this div) -->
+
+
+			<!-- FOOTER (inside the content) -->
+			<footer class="techwave_fn_footer">
+				<div class="techwave_fn_footer_content">
+					<div class="copyright">
+						<p>2023© Fransiskus Riswan Indra Simbolon</p>
+					</div>
+					<div class="menu_items">
+						<ul>
+							<li><a href="terms.html">T A </a></li>
+							<li><a href="privacy.html">Skrispi </a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+			<!-- !FOOTER (inside the content) -->
+
+		</div>
+		<!-- !CONTENT -->
+
+
+	</div>
+</div>
+{% endblock content %}

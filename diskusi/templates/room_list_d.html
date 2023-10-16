@@ -1,0 +1,128 @@
+{% extends "temp/base_dsn.html" %}
+{% load static %}
+{% block content %}
+<div class="techwave_fn_content">
+
+    <!-- PAGE (all pages go inside this div) -->
+    <div class="techwave_fn_page">
+
+        <!-- Models Page -->
+        <div class="techwave_fn_models_page">
+
+            <div class="fn__title_holder">
+                <div class="container">
+                    <h1 class="title">Room List</h1>
+                </div>
+            </div>
+
+            <!-- Models -->
+            <div class="techwave_fn_models">
+
+                <div class="fn__tabs">
+                    </div>
+                </div>
+
+
+                <!-- models filter -->
+                <div class="container">
+                    <div class="models__filter">
+                        <div class="filter__search">
+                            <form method="GET" action="{% url 'room_list_d' %}">
+                                <input type="text" name="q" placeholder="Search room...">
+                                <button type="submit" class="techwave_fn_button"><span>Cari</span></button>
+                            </form>
+                        </div>
+                        
+
+                        </div>
+                    </div>
+                </div>
+                <!-- !models filter -->
+
+
+
+                <div class="container">
+                    <!-- models content -->
+                    <div class="models__content">
+                        <div class="models__results">
+                            <div class="fn__preloader">
+                                <div class="icon"></div>
+                                <div class="text">Loading</div>
+                            </div>
+                            <div class="fn__tabs_content">
+
+                                <div id="" class="tab__item active">
+                                    <ul class="fn__model_items">
+
+                                        <!-- #1 model item -->
+                                        <li class="fn__model_item new">
+                                            <div class="item">
+                                                <a href="{% url "create_room_d" %}" class="fn__full_link"></a>
+                                                <span class="add"></span>
+                                                <span class="text">Add Room</span>
+                                            </div>
+                                        </li>
+                                        {% for room in rooms %}
+                                        <li class="fn__model_item">
+                                            <div class="item">
+                                                <div class="img">
+                                                    <img src="{{room.cover.url}}" alt="">
+                                                </div>
+                                                <div class="item__info">
+                                                    
+                                                    {% if room.author == request.user %}
+                                                    <h3 class="title"><a href="{% url 'room_detail_d' room.id %}">{{room.name}}</a></h3>
+                                                    {% else %}
+                                                    <h3 class="title"><a href="{% url 'join_room_d' room.id %}">{{room.name}}</a></h3>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item__author">
+                                                    <img src="{{ room.cover.url }}" alt="Cover Image">
+                                                    <h3 class="author_name">{{room.author.username}}</h3>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+
+
+
+
+
+                        </div>
+                        <!-- <div class="models__more">
+                            <a href="#" class="medium techwave_fn_button"><span>Load More</span></a>
+                        </div> -->
+                    </div>
+                    <!-- !models content -->
+                </div>
+
+
+
+            </div>
+            <!-- !Models -->
+
+        </div>
+        <!-- !Models Page -->
+
+    </div>
+    <!-- !PAGE (all pages go inside this div) -->
+<!-- FOOTER (inside the content) -->
+<footer class="techwave_fn_footer">
+    <div class="techwave_fn_footer_content">
+        <div class="copyright">
+            <p>2023© Fransiskus Riswan Indra Simbolon</p>
+        </div>
+        <div class="menu_items">
+            <ul>
+                <li><a href="terms.html">T A </a></li>
+                <li><a href="privacy.html">Skrispi </a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<!-- !FOOTER (inside the content) -->
+
+</div>
+<!-- !CONTENT -->
+{% endblock content %}

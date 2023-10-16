@@ -1,0 +1,12 @@
+{% comment %} {% extends "temp/base.html" %} {% endcomment %}
+{% load static %}
+{% block content %}
+
+Join Room: {{ room.name }}
+<form method="POST">
+    {% csrf_token %}
+    <label for="code">Enter the room code:</label>
+    <input type="text" id="code" name="code">
+    <button type="submit">Join Room</button>
+</form>
+{% endblock content %}

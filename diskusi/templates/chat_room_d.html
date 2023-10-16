@@ -1,0 +1,206 @@
+{% extends "temp/base_dsn.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    @keyframes typing {
+        0% { width: 0; }
+        50% { width: 100%; }
+        100% { width: 0; }
+    }
+
+    #botResponse::before {
+        content: "";
+        display: inline-block;
+        vertical-align: bottom;
+        width: 0;
+        height: 1px;
+        background-color: black;
+        animation: typing 2s infinite;
+		
+        
+    }
+	.form-group {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-bottom: 10px; /* Atur margin sesuai kebutuhan */
+	}
+	
+	.form-group label {
+		margin-right: 10px; /* Atur margin-right sesuai kebutuhan untuk jarak antara label dan input */
+	}
+</style>
+<div class="techwave_fn_wrapper fn__has_sidebar">
+	<div class="techwave_fn_wrap">
+
+		<!-- !Searchbar -->
+
+		<!-- CONTENT -->
+		<div class="techwave_fn_content">
+
+			<!-- PAGE (all pages go inside this div) -->
+			<div class="techwave_fn_page">
+
+				<!-- AI Chat Bot Page -->
+				<div class="techwave_fn_aichatbot_page fn__chatbot">
+
+					<div class="chat__page">
+
+						<div class="font__trigger">
+							<span></span>
+						</div>
+
+						<div class="fn__title_holder">
+							<div class="container">
+								<!-- Active chat title -->
+								<h1 class="title">{{ room.name }}</h1>
+								<!-- !Active chat title -->
+							</div>
+						</div>
+
+                        <div class="container">
+							<div class="chat__list">
+
+								<div id="chat0" class="chat__item"></div>
+
+								<div class="chat__item active" id="chat1">
+                                    {% for message in messages %}
+									<div class="chat__box your__chat">
+										<div class="author"><span>{{ message.user.username }} - {{ message.timestamp }}</span></div>
+										<div class="chat">
+											<p>{% if message.content %}
+                                                {{ message.content|linebreaksbr }}
+                                            {% endif %}
+                                            {% if message.file %}
+                                            <br>
+                                            {% if message.file_type == 'image' %}
+                                                <img src="{{ message.file.url }}" alt="Image" width='500'height='320'>
+                                            {% elif message.file_type == 'video' %}
+                                                <video width="320" height="240" controls>
+                                                    <source src="{{ message.file.url }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            {% else %}
+                                                <a href="{{ message.file.url }}" target="_blank">{{ message.file }}</a>
+                                            {% endif %}
+                                        {% endif %}
+                                        </p>
+										</div>
+									</div>
+                                    {% endfor %}
+                                    {% if bot_response %}
+                                        <li>
+                                            Bot - {{ timestamp }}:
+                                            {{ bot_response|linebreaksbr }}
+                                        </li>
+                                    {% endif %}
+								</div>
+
+								<!-- <div class="chat__item" id="chat2"></div>
+
+								<div class="chat__item" id="chat3"></div>
+
+								<div class="chat__item" id="chat4"></div> -->
+
+							</div>
+						</div>
+
+						<div class="chat__comment">
+							<div class="container">
+								<div class="fn__chat_comment">
+									<form method="POST" enctype="multipart/form-data" action="{% url 'send_message' room.id %}" onsubmit="sendMessage(); return false;">
+
+
+										{% csrf_token %}
+										<div class="form-group">
+											{{ message_form.content }}
+										</div>
+										<div class="form-group">
+											<label for="{{ message_form.file.id_for_label }}">Upload File:</label>
+											{{ message_form.file }}
+										</div>
+										<button type='submit'><img src="{% static "svg/enter.svg" %}" alt="" class="fn__svg"></button>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="chat__sidebar"><center>
+						<div class="sidebar_header">
+							Deskripsi
+						</div></center>
+						<div class="sidebar_content">
+							<div class="chat__group new">
+								<div class="pagination">
+									<table style="border: none;" class="table lms_table_active">
+									  <thead>
+										<tr style="border: none;">
+										  <th scope="col" style="border: none;">Nama Room</th>
+										  <th scope="col" style="border: none;">{{room.name}}</th>
+
+
+										</tr>
+									  </thead>
+									  <tbody>
+										<tr style="border: none;">
+										  <th style="border: none;" scope="row">Kode</th>
+										  <td style="border: none;">{{room.code}}</td>
+
+
+										  </tr>
+										  <tr style="border: none;">
+											<th style="border: none;" scope="row"><a href="" class="question_content"></a>Author</th>
+											<td style="border: none;">{{room.author.username}}</td>
+
+
+											</tr>
+										</tr>
+
+									  </tbody>
+									</table>
+
+								  </div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- !AI Chat Bot Page -->
+
+			</div>
+			<!-- !PAGE (all pages go inside this div) -->
+
+
+			<!-- FOOTER (inside the content) -->
+			<footer class="techwave_fn_footer">
+				<div class="techwave_fn_footer_content">
+					<div class="copyright">
+						<p>2023© Fransiskus Riswan Indra Simbolon</p>
+					</div>
+					<div class="menu_items">
+						<ul>
+							<li><a href="terms.html">T A </a></li>
+							<li><a href="privacy.html">Skrispi </a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+			<!-- !FOOTER (inside the content) -->
+
+		</div>
+		<!-- !CONTENT -->
+
+
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+{% endblock content %}

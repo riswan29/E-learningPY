@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nilai Tugas</title>
+</head>
+<body>
+
+<h1>Nilai Tugas: {{ assignment.title }}</h1>
+
+{% for submission, grade in grades_data.items %}
+    <h3>Pengirim: {{ submission.author.email }}</h3>
+    {% if grade %}
+        <p>Nilai: {{ grade.grade }}</p>
+        <p>Feedback: {{ grade.feedback }}</p>
+    {% else %}
+        <p>Tugas belum dinilai.</p>
+    {% endif %}
+{% endfor %}
+
+</body>
+</html>

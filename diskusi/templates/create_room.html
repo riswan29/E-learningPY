@@ -1,0 +1,89 @@
+{% extends "temp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- CONTENT -->
+<div class="techwave_fn_content">
+
+    <!-- PAGE (all pages go inside this div) -->
+    <div class="techwave_fn_page">
+
+        <!-- FAQ Page -->
+        <div class="techwave_fn_contact_page">
+
+            <!-- Page Title -->
+            <div class="techwave_fn_pagetitle">
+                <h2 class="title">Buat Room</h2>
+            </div>
+            <!-- !Page Title -->
+
+            <div class="contactpage">
+                <div class="container small">
+
+
+
+                    <div class="fn_contact_form">
+                        <form method="post" class="contact_form" id="contact_form" autocomplete="off" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="input_list">
+                                <ul>
+                                    <li>
+                                        {% comment %} <label class='form-label'>Cover Room</label {% endcomment %}
+                                        <input type="file" class='form-control' placeholder="Nama room"{{form.cover}}
+                                                                         </li>
+                                    <li>
+                                        <input type="text" class="form-control" placeholder="Nama room"{{form.name}}
+                                                                         </li>
+                                                                        
+
+                                    <li>
+                                        <textarea  class="lebar" placeholder="Your Description" {{form.description}}
+                                    </textarea>
+                                    </li>
+                                                            <li>
+                                        <div>
+                                            <button type="submit" class="techwave_fn_button">Create Room</button>
+                                                
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="returnmessage" data-success="Your message has been received, We will contact you soon."></div>
+                            <div class="empty_notice"><span>! Please Fill Required Fields !</span></div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- !FAQ Page -->
+
+    </div>
+    <!-- !PAGE (all pages go inside this div) -->
+
+
+    <!-- FOOTER (inside the content) -->
+    <footer class="techwave_fn_footer">
+        <div class="techwave_fn_footer_content">
+            <div class="copyright">
+                <p>2023© Fransiskus Riswan Indra Simbolon</p>
+</div>
+<div class="menu_items">
+    <ul>
+        <li><a href="terms.html">T A </a></li>
+        <li><a href="privacy.html">Skrispi </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- !FOOTER (inside the content) -->
+
+</div>
+<!-- !CONTENT -->
+
+{% endblock content %}

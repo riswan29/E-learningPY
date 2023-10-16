@@ -1,0 +1,115 @@
+{% extends "temp/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="techwave_fn_content">
+	<!-- PAGE (all pages go inside this div) -->
+	<div class="techwave_fn_page">
+	  <!-- Community Feed Page -->
+	  <div class="techwave_fn_community_page">
+		<div class="fn__title_holder">
+		  <div class="container">
+			<h1 class="title">Lihat Tugas</h1>
+		  </div>
+		</div>
+		<!-- Feed -->
+		<div class="techwave_fn_feed">
+		  <div class="container">
+			<!-- feed filter -->
+			<div class="feed__filter">
+			  <div class="filter__left">
+				<form action="{% url 'list_tgs' %}" method="GET">
+					<div class="filter__search">
+						<input type="text" name="q" placeholder="Cari Tugas">
+						<button type="submit" class="techwave_fn_button"><span>Cari</span></button>
+					</div>
+				</form>
+				
+			  </div>
+			  <div class="filter__right">
+			  </div>
+			</div>
+			<!-- !feed filter -->
+			<!-- feed content -->
+			<div class="feed__content">
+			  <div class="feed__results">
+				<div class="fn__preloader">
+				  <div class="icon"></div>
+				  <div class="text">Loading</div>
+				</div>
+				<div class="pagination">
+				  <table class="table lms_table_active">
+					<thead>
+					  <tr>
+						<th scope="col" style="text-align: center; ">Nama Tugas</th>
+						<th scope="col" style="text-align: center;">Deadline</th>
+                        <th scope="col" style="text-align: center;">File</th>
+					  </tr>
+					</thead>
+					<tbody>
+                        {% for assignment in page_obj %}
+					  <tr>
+						<th scope="row"><a href="" class="question_content"></a>{{ assignment.title }}</th>
+						<td>{{ assignment.deadline }}</td>
+                        <td><a href="{% url 'detail_task' assignment_id=assignment.id %}">Detail tugas</a></li>
+                            {% empty %}</td>
+					  </tr>
+                      {% endfor %}
+					</tbody>
+				  </table>
+				</div>
+			  </div>
+			  <div class="pagination">
+				<ul class="pagination__list">
+					{% if page_obj.has_previous %}
+						<li class="pagination__item"><a href="?page=1" class="pagination__link">&laquo;</a></li>
+						<li class="pagination__item"><a href="?page={{ page_obj.previous_page_number }}" class="pagination__link">Start</a></li>
+					{% endif %}
+					
+					{% for num in page_obj.paginator.page_range %}
+						<li class="pagination__item {% if page_obj.number == num %}active{% endif %}"><a href="?page={{ num }}" class="pagination__link">{{ num }}</a></li>
+					{% endfor %}
+					
+					{% if page_obj.has_next %}
+						<li class="pagination__item"><a href="?page={{ page_obj.next_page_number }}" class="pagination__link">End</a></li>
+						<li class="pagination__item"><a href="?page={{ page_obj.paginator.num_pages }}" class="pagination__link">&raquo;</a></li>
+					{% endif %}
+				</ul>
+			</div>
+			
+							<!-- !feed content -->
+
+						</div>
+					</div>
+					<!-- !Feed -->
+
+				</div>
+				<!-- !Community Feed Page -->
+
+			</div>
+			<!-- !PAGE (all pages go inside this div) -->
+
+
+			<!-- FOOTER (inside the content) -->
+			<footer class="techwave_fn_footer">
+				<div class="techwave_fn_footer_content">
+					<div class="copyright">
+						<p>2023© Fransiskus Riswan Indra Simbolon</p>
+					</div>
+					<div class="menu_items">
+						<ul>
+							<li><a href="terms.html">T A </a></li>
+							<li><a href="privacy.html">Skrispi </a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+			<!-- !FOOTER (inside the content) -->
+
+		</div>
+		<!-- !CONTENT -->
+
+
+	</div>
+</div>
+{% endblock content %}

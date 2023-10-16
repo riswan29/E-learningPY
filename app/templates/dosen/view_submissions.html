@@ -1,0 +1,94 @@
+{% extends "temp/base_dsn.html" %}
+{% load static %}
+
+{% block content %}
+<div class="techwave_fn_content">
+    <!-- PAGE (all pages go inside this div) -->
+    <div class="techwave_fn_page">
+        <!-- Community Feed Page -->
+        <div class="techwave_fn_community_page">
+            <div class="fn__title_holder">
+                <div class="container">
+                    <h1 class="title">Daftar Pengirim Tugas : {{ assignment.title }}</h1>
+                </div>
+            </div>
+            <!-- Feed -->
+            <div class="techwave_fn_feed">
+                <div class="container">
+                    <!-- feed filter -->
+                    
+                    <!-- !feed filter -->
+                    <!-- feed content -->
+                    <div class="feed__content">
+                        <div class="feed__results">
+                            <div class="fn__preloader">
+                                <div class="icon"></div>
+                                <div class="text">Loading</div>
+                            </div>
+                            <div class="pagination">
+                                <table class="table lms_table_active">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="text-align: center;">Nama Pengirim</th>
+                                            <th scope="col" style="text-align: center;">Dikirim Tanggal</th>
+                                            <th scope="col" style="text-align: center;">Jurusan</th>
+                                            <th scope="col" style="text-align: center;">Semester</th>
+                                            <th scope="col" style="text-align: center;">File Kiriman</th>
+                                            <th scope="col" style="text-align: center;">Nilai</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for submission in submissions %}
+                                        <tr>
+                                            <th scope="row"><a href=""
+                                                    class="question_content"></a>{{ submission.author.full_name }}</th>
+                                            <td>{{ submission.submission_time }}</td>
+                                            <td>{{submission.author.department }}</td>
+                                            <td>{{ submission.author.semester }}</td>
+                                            <td><a href="{{ submission.attachment.url }}"
+                                                    target="_blank">Download</a></td>
+                                            <td><a href="{% url 'grade_assignment' submission.id %}">Beri Nilai</a></td>
+                                        </tr>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- !feed content -->
+
+                    </div>
+                </div>
+                <!-- !Feed -->
+
+            </div>
+            <!-- !Community Feed Page -->
+
+        </div>
+        <!-- !PAGE (all pages go inside this div) -->
+
+
+        <!-- FOOTER (inside the content) -->
+        <footer class="techwave_fn_footer">
+            <div class="techwave_fn_footer_content">
+                <div class="copyright">
+                    <p>2023© Fransiskus Riswan Indra Simbolon</p>
+                </div>
+                <div class="menu_items">
+                    <ul>
+                        <li><a href="terms.html">T A </a></li>
+                        <li><a href="privacy.html">Skrispi </a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+        <!-- !FOOTER (inside the content) -->
+
+    </div>
+    <!-- !CONTENT -->
+
+
+</div>
+</div>
+{% endblock content %}

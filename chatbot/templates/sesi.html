@@ -1,0 +1,16 @@
+
+    {% comment %} {% for sesi in sesi_list %}
+        <li><a href="{% url 'tambah_data_tabel' uuid=sesi.uuid %}">Go Tabel {{ forloop.counter }}</a></li>
+    {% endfor %} {% endcomment %}
+    
+    {% if sesi_last and request.user.role == 'Mahasiswa' %}
+    <script>
+        // Redirect to the last session page for Mahasiswa
+        window.location.href = "{% url 'tambah_data_tabel' uuid=sesi_last.uuid %}";
+    </script>
+{% elif sesi_last and request.user.role == 'Dosen' %}
+    <script>
+        // Redirect to the last session page for Dosen
+        window.location.href = "{% url 'dsn_cb' uuid=sesi_last.uuid %}";
+    </script>
+{% endif %}

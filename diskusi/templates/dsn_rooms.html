@@ -1,0 +1,57 @@
+{% extends "temp/base_dsn.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="techwave_fn_content">
+    <div class="techwave_fn_page">
+        <div class="techwave_fn_models_page">
+            
+
+            <center>
+            <div class="filter__search">
+                <form method="GET" >
+                    <input type="text" name="q" placeholder="Search room...">
+                    <button type="submit" class="techwave_fn_button"><span>Cari</span></button>
+                </form>
+            </div>
+        </center>
+            
+            {% comment %} {% if query %}
+                <p>Search results for: <strong>{{ query }}</strong></p>
+            {% endif %} {% endcomment %}
+            <div class="techwave_fn_models">
+                <div class="fn__tabs">
+                </div>
+
+                <div class="container">
+                    <div class="models__content">
+                        <div class="models__results">
+                            <h2>Room Yang Kamu Ikuti</h2>
+                            <ul class="fn__model_items">
+                                {% for room in rooms_joined %}
+                                <li class="fn__model_item">
+                                    <div class="item">
+                                        <div class="img">
+                                            <img src="{{room.cover.url}}" alt="">
+                                        </div>
+                                        <div class="item__info">
+                                            <h3 class="title"><a href="{% url 'join_room_d' room.id %}">{{room.name}}</a></h3>
+                                        </div>
+                                        <div class="item__author">
+                                            <img src="{{ room.cover.url }}" alt="Cover Image">
+                                            <h3 class="author_name">{{room.author.username}}</h3>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

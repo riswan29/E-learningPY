@@ -1,0 +1,168 @@
+{% extends "temp/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- CONTENT -->
+<div class="techwave_fn_content">
+
+    <!-- PAGE (all pages go inside this div) -->
+    <div class="techwave_fn_page">
+
+        <!-- User Settings Page -->
+        <div class="techwave_fn_user_settings_page">
+            <!-- Page Title -->
+            <div class="techwave_fn_pagetitle">
+                <h2 class="title">Edit Profile</h2>
+            </div>
+            <!-- !Page Title -->
+
+            <div class="container small">
+                <div class="techwave_fn_user_settings">
+                    <form method='post'  enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="user__settings">
+                            <div class="settings_left">
+
+                                <!-- Upload Shortcode -->
+                                <label class="fn__upload">
+                                    <span class="upload_content">
+                                        <img src="{% static "svg/upload.svg" %}" alt="" class="fn__svg">
+                                        <span class="title">Drag & Drop a Image</span>
+                                        <span class="fn__lined_text">
+                                            <span class="line"></span>
+                                            <span class="text">Or</span>
+                                            <span class="line"></span>
+                                        </span>
+                                        <span class="title">Browse</span>
+                                        <span class="desc">Supports JPG, JPEG, and PNG</span>
+                                    </span>
+                                    <span class="upload_preview">
+                                        <a href="#" class="fn__closer fn__icon_button">
+                                            <img src="{% static "svg/close.svg" %}" alt="" class="fn__svg">
+                                        </a>
+                                        <img src="#" alt="" class="preview_img">
+                                    </span>
+
+                                    <input type="file" accept="image/*" id="id_image" name="image">
+                                    
+                                </label>
+                                <!-- !Upload Shortcode -->
+
+                            </div>
+                            {% comment %} <div class="settings_left">
+
+                                <!-- Upload Shortcode -->
+                                <label class="fn__upload">
+                                    <span class="upload_content">
+                                        <img src="{% static "svg/upload.svg" %}" alt="" class="fn__svg">
+                                        <span class="title">Drag & Drop a Image</span>
+                                        <span class="fn__lined_text">
+                                            <span class="line"></span>
+                                            <span class="text">Or</span>
+                                            <span class="line"></span>
+                                        </span>
+                                        <span class="title">Browse</span>
+                                        <span class="desc">Supports JPG, JPEG, and PNG</span>
+                                    </span>
+                                    <span class="upload_preview">
+                                        <a href="#" class="fn__closer fn__icon_button">
+                                            <img src="{% static "svg/close.svg" %}" alt="" class="fn__svg">
+                                        </a>
+                                        <img src="#" alt="" class="preview_img">
+                                    </span>
+
+                                    <input type="file" accept="image/*" id="id_image" name="image">
+                                </label>
+                                <!-- !Upload Shortcode -->
+
+                            </div> {% endcomment %}
+
+                            <div class="settings_right">
+                                <div class="item">
+                                    <label class="input_label" for="name">Nama Lengkap</label>
+                                    <div class="input_item">
+                                        <input class="input" type="text" id="name" {{form.full_name}}
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <label class="input_label" for="username">Username</label>
+                                    <div class="input_item">
+                                        <span class="email">@</span>
+                                        <input class="input" type="text" id="username" {{form.username}}
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <label class="input_label" for="nip">NIP</label>
+                                    <div class="input_item">
+                                        <input class="input" type="number" id="nip" {{form.nidn}}
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <label class="input_label" for="email">Email</label>
+                                    <div class="input_item">
+                                        <input class="input" type="email" id="email" {{form.email}}
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <label class="input_label" for="alamat">Alamat</label>
+                                    <div class="input_item">
+                                        <textarea class="input" type="text" id="email" {{form.address}}
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <label class="input_label" for="notep">Nomor Telepon</label>
+                                    <div class="input_item">
+                                        <input class="input" type="number" id="notep" {{form.phone_number}}
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <label class="input_label" for="password">Password</label>
+                                    <div class="input_item">
+                                        <input class="input" type="password" id="password" {{form.new_password1}}
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <label class="input_label" for="password">Konfirmasi Password</label>
+                                    <div class="input_item">
+                                        <input class="input" type="password" id="password" {{form.new_password2}}
+                                    </div>
+                                </div>
+                                
+                                <div class="item">
+                                    <label class="fn__submit">
+                                        <input type="submit" value="Save Changes">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- !User Settings Page -->
+
+    </div>
+    <!-- !PAGE (all pages go inside this div) -->
+
+
+    <!-- FOOTER (inside the content) -->
+    <footer class="techwave_fn_footer">
+        <div class="techwave_fn_footer_content">
+            <div class="copyright">
+                <p>2023© Fransiskus Riswan Indra Simbolon</p>
+            </div>
+            <div class="menu_items">
+                <ul>
+                    <li><a href="terms.html">T A </a></li>
+                    <li><a href="privacy.html">Skrispi </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- !FOOTER (inside the content) -->
+
+</div>
+<!-- !CONTENT -->
+{% endblock content %}
+\

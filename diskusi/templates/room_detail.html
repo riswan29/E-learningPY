@@ -1,0 +1,116 @@
+{% extends "temp/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- CONTENT -->
+<div class="techwave_fn_content">
+
+    <!-- PAGE (all pages go inside this div) -->
+    <div class="techwave_fn_page">
+
+        <!-- User Profile Page -->
+        <div class="techwave_fn_user_profile_page">
+            <!-- Page Title -->
+            <div class="techwave_fn_pagetitle">
+                <h2 class="title">Detail Room</h2>
+            </div>
+            <!-- !Page Title -->
+
+            <div class="container small">
+                <div class="techwave_fn_user_profile">
+
+                    <div class="user__profile">
+                        <div class="user_avatar">
+                            <img src="{{room.cover.url}}" alt="">
+                        </div>
+                        <div class="user_details">
+                            <ul>
+                                <li>
+                                    <div class="item">
+                                        <h4 class="subtitle">Nama Room</h4>
+                                        <h3 class="title">{{room.name}}</h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <h4 class="subtitle">Code</h4>
+                                        <h3 class="title">{{room.code}}</h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <h4 class="subtitle">Deskripsi</h4>
+                                        <h3 class="title">{{room.description}}</h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <h4 class="subtitle">Author</h4>
+                                        <h3 class="title">{{room.author}}</h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <h4 class="subtitle">Participant</h4>
+                                        <h3 class="title">{{participants.count}}</h3>
+                                    </div>
+                                </li>
+                                {% comment %} {% for participant in participants %}
+            <li>
+                {{ participant.user.username }}
+                {% if participant.user == request.user and not participant.is_creator %}
+                    <a href="{% url 'leave_room' room.id %}">Leave Group</a>
+                {% endif %}
+            </li>
+        {% endfor %} {% endcomment %}
+                                <li>
+                                    <div class="item">
+                                        <div class="filter__sorting">
+                                            <a href="{% url 'chat_room' room.id %}" class="filter__new disabled techwave_fn_button has__icon small__border">
+                                                <span>Enter Room</span>
+                                            </a>
+                                        </div>
+                                        <!-- <a  href="chat_room.html" class="techwave_fn_button">
+                                            <span>Enter Room</span>
+                                        </a> -->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <a href="user-settings.html" class="user_edit fn__icon_button">
+                            <img src="svg/setting.svg" alt="" class="fn__svg">
+                        </a> -->
+                    </div>
+
+                    <!--  -->
+
+                </div>
+            </div>
+
+        </div>
+        <!-- !User Profile Page -->
+
+    </div>
+    <!-- !PAGE (all pages go inside this div) -->
+
+
+    <!-- FOOTER (inside the content) -->
+    <footer class="techwave_fn_footer">
+        <div class="techwave_fn_footer_content">
+            <div class="copyright">
+                <p>2023© Fransiskus Riswan Indra Simbolon</p>
+            </div>
+            <div class="menu_items">
+                <ul>
+                    <li><a href="terms.html">T A </a></li>
+                    <li><a href="privacy.html">Skrispi </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- !FOOTER (inside the content) -->
+
+</div>
+<!-- !CONTENT -->
+
+{% endblock content %}

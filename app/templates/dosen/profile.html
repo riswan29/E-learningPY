@@ -1,0 +1,80 @@
+{% extends "temp/base.html" %}
+{% load static %}
+{% block content %}
+<div class="techwave_fn_content">
+
+    <!-- PAGE (all pages go inside this div) -->
+    <div class="techwave_fn_page">
+
+        <!-- User Profile Page -->
+        <div class="techwave_fn_user_profile_page">
+            <!-- Page Title -->
+            <div class="techwave_fn_pagetitle">
+                <h2 class="title">My Profile</h2>
+            </div>
+            <!-- !Page Title -->
+
+            <div class="container small">
+                <div class="techwave_fn_user_profile">
+
+                    <div class="user__profile">
+                        <div class="user_avatar">
+                            <img src="{{request.user.image.url}}" alt="">
+                        </div>
+                        <div class="user_details">
+                            <ul>
+                                <li>
+                                    <div class="item">
+                                        <h4 class="subtitle">Name</h4>
+                                        <h3 class="title">{{request.user.full_name}}</h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <h4 class="subtitle">Username</h4>
+                                        <h3 class="title">@{{request.user.username}}</h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <h4 class="subtitle">Email Address</h4>
+                                        <h3 class="title">{{request.user.email}}</h3>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="{% url "edit_dsn" %}" class="user_edit fn__icon_button">
+                            <img src="{% static "svg/setting.svg" %}" alt="" class="fn__svg">
+                        </a>
+                    </div>
+
+                    <!--  -->
+
+                </div>
+            </div>
+
+        </div>
+        <!-- !User Profile Page -->
+
+    </div>
+    <!-- !PAGE (all pages go inside this div) -->
+
+
+    <!-- FOOTER (inside the content) -->
+    <footer class="techwave_fn_footer">
+        <div class="techwave_fn_footer_content">
+            <div class="copyright">
+                <p>2023© Fransiskus Riswan Indra Simbolon</p>
+            </div>
+            <div class="menu_items">
+                <ul>
+                    <li><a href="terms.html">T A </a></li>
+                    <li><a href="privacy.html">Skrispi </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- !FOOTER (inside the content) -->
+
+</div>
+{% endblock content %}
